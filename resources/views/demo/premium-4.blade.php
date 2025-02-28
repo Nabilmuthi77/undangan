@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo Premium-4</title>
+
+    <!-- Resources -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Serif+Display&display=swap"
+        rel="stylesheet">
+
+    <!-- Flowbite -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .vertical-text {
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+        }
+
+        .text-shadow {
+            text-shadow: -5px 5px 0px rgba(255, 255, 255, 0.2);
+        }
+
+        .text-shadow-2 {
+            text-shadow: 0px 5px 0px rgba(255, 255, 255, 0.2);
+        }
+
+        .px-4::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .px-4::-webkit-scrollbar-track {
+            background: #ffffff;
+            border-radius: 10px;
+        }
+
+        .px-4::-webkit-scrollbar-thumb {
+            background-color: #C3CEB1;
+            border-radius: 10px;
+        }
+
+        .px-4::-webkit-scrollbar-thumb:hover {
+            background-color: #C3CEB1;
+        }
+    </style>
+</head>
+
+<body class="antialiased" style="overflow: hidden; background-color: #C3CEB1;">
+
+    <!-- Sampul -->
+    <section>
+        <div id="cover-page"
+            class="bg-[#879374] relative flex flex-col justify-between items-center min-h-screen mx-auto max-w-[500px]">
+            <div class="flex flex-col justify-center py-5 space-y-5 flex-grow w-full">
+                <!-- Judul -->
+                <div class="text-start text-white pl-5 pb-10 z-10" data-aos="fade-right" data-aos-easing="ease-in-sine"
+                    data-aos-duration="800" data-aos-delay="500">
+                    <div class="font-pinyon text-3xl">
+                        The Wedding of
+                    </div>
+                    <div class="mt-1 font-dmSerifDisplay text-4xl">
+                        Rizky & Ana
+                    </div>
+                </div>
+                <!-- Foto Cover -->
+                <div class="relative flex justify-center z-10 pb-5" data-aos="fade-left" data-aos-easing="ease-in-sine"
+                    data-aos-duration="800" data-aos-delay="500">
+                    <img src="{{ asset('tema/foto/cover.jpg') }}" alt="Cover Image"
+                        class="rounded-lg max-w-64 h-64 object-cover">
+                    <div class="absolute rounded-lg border-[6px] border-[#879374] top-[-4rem] right-3 z-20">
+                        <img src="{{ asset('tema/foto/cover.jpg') }}" alt="Cover Image"
+                            class="rounded-sm max-w-32 h-32 object-cover">
+                    </div>
+                </div>
+                <!-- Nama Tamu -->
+                <div class="text-start text-white ml-5 z-10 border-l-[10px] border-white" data-aos="fade-right"
+                    data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-delay="500">
+                    <div class="font-dmSerifDisplay ml-3">
+                        <div class="mt-[-0.35rem]">
+                            Kepada Yth :
+                        </div>
+                        <div class="mt-1">
+                            Bapak/Ibu/Saudara/i
+                        </div>
+                        <div class="rounded text-lg mt-5 mb-1">
+                            Ikhsan
+                        </div>
+                        <hr class="border-white">
+                        <div>
+                            <button type="button" onclick="openInvitation()"
+                                class="text-[#879374] border-2 border-[#C3CEB1] py-2 px-6 mt-5 font-cormorant font-bold text-lg focus:outline-none focus:ring-2 focus:ring-[#ffffff] focus:ring-offset-1 transition duration-150"
+                                style="background-color: #ffffff;">
+                                <i class="fa-solid fa-envelope mr-1"></i>
+                                Buka Undangan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pembuka -->
+    <section id="main-invitation">
+        <div
+            class="bg-[#879374] relative flex flex-col justify-center items-start min-h-screen w-full mx-auto max-w-[500px]">
+            <div
+                class="rounded-tr-[230px] rounded-br-xl border-t-4 border-b-4 border-r-4 border-[#C3CEB1] bg-white shadow-xl my-10">
+                <!-- Foto Pembuka -->
+                <div class="w-full">
+                    <img src="{{ asset('tema/foto/pembuka.jpg') }}" alt=""
+                        class="max-w-80 h-auto rounded-tr-[230px] m-2 border-2 border-[#C3CEB1] shadow-xl"
+                        data-aos="zoom-in" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                    <div class="mt-8 pl-2 text-[#879374] font-dmSerifDisplay text-4xl" data-aos="fade-up"
+                        data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        Rizky <span class="px-2">&</span> Ana
+                    </div>
+                </div>
+                <!-- Countdown -->
+                <div class="relative w-full mt-3 max-w-80 mx-auto">
+                    <div id="countdown" class="text-center font-cormorant flex justify-center space-x-4 mx-2">
+                        <div class="bg-[#879374]/50 text-center border-b-[3px] border-[#879374] px-2 mt-5"
+                            data-aos="flip-up" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <span class="text-xl w-12 h-12 flex items-center justify-center days">
+                                00
+                            </span>
+                            <span class="pb-3 flex items-center justify-center">
+                                Hari
+                            </span>
+                        </div>
+                        <div class="bg-[#879374]/50 text-center border-b-[3px] border-[#879374] px-2 mt-5"
+                            data-aos="flip-up" data-aos-easing="ease-in-sine" data-aos-duration="800"
+                            data-aos-delay="200">
+                            <span class="text-xl p-3 w-12 h-12 flex items-center justify-center hours">
+                                00
+                            </span>
+                            <span class="pb-3 flex items-center justify-center">
+                                Jam
+                            </span>
+                        </div>
+                        <div class="bg-[#879374]/50 text-center border-b-[3px] border-[#879374] px-2 mt-5"data-aos="flip-up"
+                            data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-delay="400">
+                            <span class="text-xl p-3 w-12 h-12 flex items-center justify-center minutes">
+                                00
+                            </span>
+                            <span class="pb-3 flex items-center justify-center">
+                                Menit
+                            </span>
+                        </div>
+                        <div class="bg-[#879374]/50 text-center border-b-[3px] border-[#879374] px-2 mt-5"data-aos="flip-up"
+                            data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-delay="600">
+                            <span class="text-xl p-3 w-12 h-12 flex items-center justify-center seconds">
+                                00
+                            </span>
+                            <span class="pb-3 flex items-center justify-center">
+                                Detik
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Quote -->
+                <div class="text-center my-10 max-w-80 mx-auto" data-aos="fade-up" data-aos-easing="ease-in-sine"
+                    data-aos-duration="800">
+                    <div class="text-lg px-5 font-cormorant">
+                        <i class="fa-solid fa-quote-left text-[#879374] text-2xl"></i>
+                        <br>
+                        "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari
+                        jenismu sendiri, supaya kamu merasa tenang dan tentram kepadanya, dan dijadikan-Nya
+                        diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar
+                        terdapat
+                        tanda-tanda bagi kaum yang berfikir."
+                    </div>
+                    <div class="pt-5 font-semibold font-croissant text-[#879374]">
+                        Ar Rum: 21
+                    </div>
+                </div>
+            </div>
+            <!-- Tanggal -->
+            <div class="absolute rounded-l-[230px] bg-white border-t-2 border-b-2 border-l-2 border-[#C3CEB1] shadow-lg top-52 right-0 h-[400px] px-4 py-6 flex items-center justify-center"
+                data-aos="slide-up" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                <span class="font-cormorant text-2xl font-extrabold text-[#879374] whitespace-nowrap vertical-text">
+                    31 Desember 2025
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mempelai -->
+    <section>
+        <div class="bg-[#879374] relative flex flex-col min-h-screen w-full mx-auto max-w-[500px]">
+            <!-- Teks Pembuka -->
+            <div class="bg-white p-5 border-b-4 border-t-4 border-[#C3CEB1] shadow-xl mt-10">
+                <div class="text-3xl">
+                    <div class="font-pinyon" data-aos="fade-right" data-aos-easing="ease-in-sine"
+                        data-aos-duration="800">
+                        We Are Getting
+                    </div>
+                    <div class="mt-1 font-cormorant font-semibold text-[#879374] uppercase" data-aos="fade-left"
+                        data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        Married!
+                    </div>
+                </div>
+                <div class="text-sm mt-7" data-aos="fade-up" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                    <div class="text-[#879374] font-croissant">
+                        Assalamu’alaikum Wr. Wb.
+                    </div>
+                    <div class="text-lg mt-2 font-cormorant">
+                        Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta’ala, Insya Allah kami akan
+                        menyelenggarakan
+                        acara pernikahan :
+                    </div>
+                </div>
+            </div>
+            <!-- Card Mempelai Pria -->
+            <div class="mt-10 flex justify-end ml-auto relative">
+                <!-- The Groom Mobile -->
+                <div class="block md:hidden absolute -left-16 top-[35%] transform -translate-y-1/2" data-aos="zoom-in"
+                    data-aos-easing="ease-in-sine" data-aos-duration="800">
+                    <span
+                        class="text-5xl font-cormorant font-bold text-white vertical-text rotate-[-0.50turn] text-shadow">
+                        The Groom
+                    </span>
+                </div>
+                <!-- The Groom Desktop -->
+                <div class="hidden md:flex flex-col justify-center items-center gap-2 md:mr-[3.7rem] text-center"
+                    data-aos="zoom-in" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                    <span class="text-5xl font-cormorant font-bold text-white text-shadow">
+                        The
+                    </span>
+                    <span class="text-5xl font-cormorant font-bold text-white text-shadow">
+                        Groom
+                    </span>
+                </div>
+                <!-- Data Mempelai Pria -->
+                <div class="flex flex-col items-end" data-aos="fade-left" data-aos-easing="ease-in-sine"
+                    data-aos-duration="800">
+                    <div
+                        class="bg-white font-cormorant border-t-4 border-b-4 border-l-4 border-[#C3CEB1] rounded-tl-[130px] rounded-l-xl w-64 p-2 pb-10 mt-10 shadow-xl">
+                        <img src="{{ asset('tema/foto/mempelai-pria.jpg') }}" alt=""
+                            class="w-64 h-64 object-cover border-2 border-[#C3CEB1] rounded-tl-[130px] shadow-xl">
+                        <h2 class="text-[#879374] text-3xl font-extrabold mt-10 flex justify-end">
+                            Rizky Syaputra
+                        </h2>
+                        <p class="text-lg mt-3 flex justify-end">
+                            Putri ke-3
+                        </p>
+                        <p class="text-lg flex justify-end">
+                            Bapak Syahrial
+                        </p>
+                        <p class="text-lg flex justify-end">
+                            &
+                        </p>
+                        <p class="text-lg mb-3 flex justify-end">
+                            Ibu Yuyun Rusmiati
+                        </p>
+                        <div class="flex justify-end mt-5">
+                            <a href="https://www.instagram.com" target="_blank"
+                                class="flex items-center gap-2 py-[0.35rem] px-6 bg-[#879374] border-2 border-[#C3CEB1] text-white font-cormorant font-bold shadow-xl focus:ring-2 focus:ring-[#C3CEB1] focus:ring-offset-1 transition ease-in-out duration-150">
+                                <i class="fab fa-instagram"></i>
+                                Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Mempelai Wanita -->
+            <div class="mb-10 flex justify-end mr-auto relative">
+                <!-- Data Mempelai Wanita -->
+                <div class="flex justify-start mr-auto" data-aos="fade-right" data-aos-easing="ease-in-sine"
+                    data-aos-duration="800">
+                    <div class="flex flex-col items-start">
+                        <div
+                            class="bg-white font-cormorant border-t-4 border-b-4 border-r-4 border-[#C3CEB1] rounded-tr-[130px] rounded-r-xl w-64 p-2 pb-10 mt-10 shadow-xl">
+                            <img src="{{ asset('tema/foto/mempelai-wanita.jpg') }}" alt=""
+                                class="w-64 h-64 object-cover  rounded-tr-[130px] shadow-xl">
+                            <h2 class="text-[#879374] text-3xl font-extrabold mt-10 flex justify-start">
+                                Ana Lutfiani
+                            </h2>
+                            <p class="text-lg mt-3 flex justify-start">
+                                Putri ke-3
+                            </p>
+                            <p class="text-lg flex justify-start">
+                                Bapak Agus Sutrisno
+                            </p>
+                            <p class="text-lg flex justify-start">
+                                &
+                            </p>
+                            <p class="text-lg mb-3 flex justify-start">
+                                Ibu Rosy Meri
+                            </p>
+                            <div class="flex justify-start mt-5">
+                                <a href="https://www.instagram.com" target="_blank"
+                                    class="flex items-center gap-2 py-[0.35rem] px-6 bg-[#879374] border-2 border-[#C3CEB1] text-white font-cormorant font-bold shadow-xl focus:ring-2 focus:ring-[#C3CEB1] focus:ring-offset-1 transition ease-in-out duration-150">
+                                    <i class="fab fa-instagram"></i>
+                                    Instagram
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- The Bride Mobile -->
+                <div class="block md:hidden absolute -right-16 top-[35%] transform -translate-y-1/2"
+                    data-aos="zoom-in" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                    <span class="text-5xl font-cormorant font-bold text-white vertical-text text-shadow">
+                        The Bride
+                    </span>
+                </div>
+                <!-- The Bride Dekstop -->
+                <div class="hidden md:flex flex-col justify-center items-center gap-2 md:ml-[4rem] text-center"
+                    data-aos="zoom-in" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                    <span class="text-5xl font-cormorant font-bold text-white text-shadow">
+                        The
+                    </span>
+                    <span class="text-5xl font-cormorant font-bold text-white text-shadow">
+                        Bride
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acara -->
+    <section>
+        <div class="bg-white relative flex flex-col justify-center items-center min-h-screen max-w-[500px] mx-auto">
+            <!-- Daftar Acara -->
+            <div
+                class="bg-[#879374] border-4 border-[#C3CEB1] text-white rounded-full shadow-xl p-5 mx-2 my-10 flex flex-col max-w-[350px]">
+                <div class="my-16">
+                    <div class="my-10 text-center">
+                        <div data-aos="zoom-in" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <h3 class="text-3xl font-dmSerifDisplay">Akad</h3>
+                            <hr class="border-white mt-3">
+                        </div>
+                        <div class="mt-7 font-cormorant" data-aos="fade-up" data-aos-easing="ease-in-sine"
+                            data-aos-duration="800">
+                            <p class="text-lg">Hari/Tanggal :</p>
+                            <p class="text-center text-lg mt-1">Minggu, 31 Desember 2024</p>
+                            <p class="text-lg mt-5">Waktu :</p>
+                            <p class="text-center text-lg mt-1">08:00 WIB - 09:00 WIB</p>
+                            <p class="text-lg mt-5">Tempat : Kediaman Mempelai Wanita</p>
+                            <p class="text-center text-lg mt-1">Perum Regency, Jl. Harmoni Raya No. 123</p>
+                            <div class="mt-7 flex justify-center">
+                                <a href="https://www.google.com/maps" target="_blank"
+                                    class="bg-white font-bold shadow-xl border-2 border-[#C3CEB1] text-[#879374] py-2 px-6 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 transition ease-in-out duration-150">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Google Maps</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-10 text-center">
+                        <div data-aos="zoom-in" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <h3 class="text-3xl font-dmSerifDisplay">Resepsi</h3>
+                            <hr class="border-white mt-3">
+                        </div>
+                        <div class="mt-7 font-cormorant" data-aos="fade-up" data-aos-easing="ease-in-sine"
+                            data-aos-duration="800">
+                            <p class="text-lg">Hari/Tanggal :</p>
+                            <p class="text-center text-lg mt-1">Minggu, 31 Desember 2024</p>
+                            <p class="text-lg mt-5">Waktu :</p>
+                            <p class="text-center text-lg mt-1">09:00 WIB - 10:00 WIB</p>
+                            <p class="text-lg mt-5">Tempat : Kediaman Mempelai Wanita</p>
+                            <p class="text-center text-lg mt-1">Perum Regency, Jl. Harmoni Raya No. 123</p>
+                            <div class="mt-7 flex justify-center">
+                                <a href="https://www.google.com/maps" target="_blank"
+                                    class="bg-white font-bold shadow-xl border-2 border-[#C3CEB1] text-[#879374] py-2 px-6 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 transition ease-in-out duration-150">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Google Maps</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri -->
+    <section>
+        <div class="bg-[#879374] relative flex justify-center items-center min-h-screen w-full mx-auto max-w-[500px]">
+            <div class="flex flex-col my-10">
+                <!-- Judul -->
+                <div class="pb-10 px-5 mx-auto text-center text-white">
+                    <div class="text-3xl uppercase font-dmSerifDisplay" data-aos="fade-left"
+                        data-aos-easing="ease-in-sine" data-aos-duration="800" style="font-weight: 1000;">
+                        Gallery
+                    </div>
+                    <div class="text-3xl font-cormorant text-shadow-2" data-aos="fade-right"
+                        data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        OUR MOMENTS
+                    </div>
+                </div>
+                <!-- Foto & Video -->
+                <div class="mx-5">
+                    <!-- Video -->
+                    <div class="shadow-xl" data-aos="zoom-in" data-aos-easing="ease-in-sine"
+                        data-aos-duration="800">
+                        <iframe class="w-full h-56"
+                            src="https://www.youtube.com/embed/imGaOIm5HOk?si=ljyrmX6DD6dG1YUF" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <!-- Foto Galeri -->
+                    <div class="">
+                        <div class="grid grid-cols-2 gap-4 py-5">
+                            <img src="{{ asset('tema/foto/foto-gallery-1.jpg') }}" alt=""
+                                class="w-full aspect-square object-cover cursor-pointer shadow-xl"
+                                onclick="openModal('{{ asset('tema/foto/foto-gallery-1.jpg') }}')" data-aos="zoom-in"
+                                data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <img src="{{ asset('tema/foto/foto-gallery-2.jpg') }}" alt=""
+                                class="w-full aspect-square object-cover cursor-pointer shadow-xl"
+                                onclick="openModal('{{ asset('tema/foto/foto-gallery-2.jpg') }}')" data-aos="zoom-in"
+                                data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <img src="{{ asset('tema/foto/foto-gallery-3.jpg') }}" alt=""
+                                class="w-full aspect-square object-cover cursor-pointer shadow-xl"
+                                onclick="openModal('{{ asset('tema/foto/foto-gallery-3.jpg') }}')" data-aos="zoom-in"
+                                data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <img src="{{ asset('tema/foto/foto-gallery-4.jpg') }}" alt=""
+                                class="w-full aspect-square object-cover cursor-pointer shadow-xl"
+                                onclick="openModal('{{ asset('tema/foto/foto-gallery-4.jpg') }}')" data-aos="zoom-in"
+                                data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <img src="{{ asset('tema/foto/foto-gallery-5.jpg') }}" alt=""
+                                class="w-full aspect-square object-cover cursor-pointer shadow-xl"
+                                onclick="openModal('{{ asset('tema/foto/foto-gallery-5.jpg') }}')" data-aos="zoom-in"
+                                data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <img src="{{ asset('tema/foto/foto-gallery-6.jpg') }}" alt=""
+                                class="w-full aspect-square object-cover cursor-pointer shadow-xl"
+                                onclick="openModal('{{ asset('tema/foto/foto-gallery-6.jpg') }}')" data-aos="zoom-in"
+                                data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cerita -->
+    <section>
+        <div class="bg-[#879374] relative flex justify-center items-center min-h-screen w-full mx-auto max-w-[500px]">
+            <!-- Konten -->
+            <div class="flex flex-col">
+                <div class="my-10">
+                    <!-- Judul -->
+                    <div class="text-4xl uppercase font-dmSerifDisplay text-white text-center mb-7"
+                        data-aos="fade-down" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        Love Story
+                    </div>
+                    <!-- Divider -->
+                    <div class="flex items-center justify-center text-center gap-4 mb-7" data-aos="zoom-in"
+                        data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        <div class="h-[1px] bg-white flex-1"></div>
+                        <div class="text-3xl text-white mx-0 md:mx-2">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="h-[1px] bg-white flex-1"></div>
+                    </div>
+                    <!-- Cerita -->
+                    <div class="mt-5 mx-5">
+                        <div class="bg-white shadow-xl rounded-xl border-4 border-[#C3CEB1]" data-aos="fade-up"
+                            data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <div class="text-xl text-[#879374] font-dmSerifDisplay p-4">
+                                Pertemuan Pertama
+                            </div>
+                            <div class="pb-4 px-4 text-lg font-cormorant">
+                                Kami bertemu di sebuah kafe kecil.
+                                Senyum pertama yang kami bagi membuat hati kami saling terhubung.
+                                Percakapan ringan mengarah pada janji untuk bertemu lagi.
+                                Itu adalah awal dari sebuah kisah cinta yang tak terduga.
+                            </div>
+                        </div>
+                        <div class="bg-white shadow-xl rounded-xl border-4 border-[#C3CEB1] mt-5 mb-10"
+                            data-aos="fade-up" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <div class="text-xl text-[#879374] font-dmSerifDisplay p-4">
+                                Lamaran
+                            </div>
+                            <div class="pb-4 px-4 text-lg font-cormorant">
+                                Setelah beberapa waktu bersama, aku melamar untuk membangun masa depan bersama.
+                                Dengan restu orangtuanya, aku tahu ini adalah langkah yang tepat.
+                                Kami siap memulai lembaran baru dalam hidup kami.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wish & RSVP -->
+    <section>
+        <div class="bg-white relative flex justify-center items-center min-h-screen w-full mx-auto max-w-[500px]">
+            <div class="bg-[#879374] flex flex-col rounded-full border-4 border-[#C3CEB1] py-32 mx-2 my-10">
+                <div class="my-10">
+                    <!-- Wish -->
+                    <div class="text-center text-white">
+                        <h2 class="text-3xl font-dmSerifDisplay mb-5 mx-5" data-aos="fade-down"
+                            data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            Wedding Wish
+                        </h2>
+                        <p class="mb-10 mx-5 font-cormorant text-lg" data-aos="fade-up"
+                            data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            Berikan ucapan, harapan dan do'a kepada kedua mempelai
+                        </p>
+                    </div>
+                    <!-- Form Wish -->
+                    <form action="#" method="POST" data-aos="fade-right" data-aos-easing="ease-in-sine"
+                        data-aos-duration="800" class="mx-5 mb-5">
+                        <div class="mb-4 w-full">
+                            <label for="name" class="block text-white font-medium font-dmSerifDisplay">
+                                Nama:
+                            </label>
+                            <input type="text" id="name" name="name"
+                                class="mt-1 block w-full border border-[#C3CEB1] py-2 px-3 text-sm font-poppins text-black"
+                                placeholder="Nama Anda" required
+                                onfocus="this.style.borderColor='#C3CEB1'; this.style.boxShadow='0 0 0 1px #ffffff';"
+                                onblur="this.style.borderColor='#C3CEB1'; this.style.boxShadow='none';"
+                                oninvalid="this.setCustomValidity('Kolom ini harus diisi')"
+                                oninput="this.setCustomValidity('')" style="border-color: #C3CEB1;">
+                        </div>
+                        <div class="mb-4 w-full">
+                            <label for="message" class="block text-white font-medium font-dmSerifDisplay">
+                                Ucapan atau Doa:
+                            </label>
+                            <textarea id="message" name="message" rows="4"
+                                class="mt-1 block w-full border border-[#C3CEB1] py-2 px-3 text-sm font-poppins text-black"
+                                placeholder="Tulis ucapan atau doa Anda di sini..." required
+                                onfocus="this.style.borderColor='#C3CEB1'; this.style.boxShadow='0 0 0 1px #ffffff';"
+                                onblur="this.style.borderColor='#C3CEB1'; this.style.boxShadow='none';"
+                                oninvalid="this.setCustomValidity('Kolom ini harus diisi')" oninput="this.setCustomValidity('')"></textarea>
+                        </div>
+                        <div class="text-center text-sm">
+                            <button type="submit"
+                                class="text-[#879374] shadow-xl py-2 px-6 border-2 border-[#C3CEB1] focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1 transition ease-in-out duration-150 font-montserrat"
+                                style="background-color: #ffffff">
+                                <span>Kirim</span>
+                                <i class="fas fa-paper-plane ml-1"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Their Wish -->
+                    <div class="px-4 mb-10 mt-5 mx-2 text-black" style="max-height: 500px; overflow-y: auto;"
+                        data-aos="fade-left" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        <div class="my-4 p-5 bg-white rounded-xl border-4 border-[#C3CEB1]">
+                            <h4 class="uppercase text-[#879374] font-dmSerifDisplay">
+                                Risa
+                            </h4>
+                            <p class="font-cormorant text-lg pt-1">
+                                Selamat ya, semoga dilancarkan sampai hari H. Amin.
+                            </p>
+                        </div>
+                        <div class="mb-4 p-5 bg-white rounded-xl border-4 border-[#C3CEB1]">
+                            <h4 class="uppercase text-[#879374] font-dmSerifDisplay">
+                                Toni
+                            </h4>
+                            <p class="font-cormorant text-lg pt-1">
+                                Selamat, SaMaWa ya.
+                            </p>
+                        </div>
+                        <div class="mb-4 p-5 bg-white rounded-xl border-4 border-[#C3CEB1]">
+                            <h4 class="uppercase text-[#879374] font-dmSerifDisplay">
+                                Lina
+                            </h4>
+                            <p class="font-cormorant text-lg pt-1">
+                                Semoga menjadi keluarga yang bahagia dan harmonis selamanya.
+                            </p>
+                        </div>
+                        <div class="mb-4 p-5 bg-white rounded-xl border-4 border-[#C3CEB1]">
+                            <h4 class="uppercase text-[#879374] font-dmSerifDisplay">
+                                Dika
+                            </h4>
+                            <p class="font-cormorant text-lg pt-1">
+                                Selamat atas pernikahannya, semoga diberkahi dengan kebahagiaan dan cinta.
+                            </p>
+                        </div>
+                        <div class="mb-4 p-5 bg-white rounded-xl border-4 border-[#C3CEB1]">
+                            <h4 class="uppercase text-[#879374] font-dmSerifDisplay">
+                                Siti
+                            </h4>
+                            <p class="font-cormorant text-lg pt-1">
+                                Barakallah! Semoga perjalanan hidup kalian selalu dilimpahi berkah.
+                            </p>
+                        </div>
+                        <div class="mb-4 p-5 bg-white rounded-xl border-4 border-[#C3CEB1]">
+                            <h4 class="uppercase text-[#879374] font-dmSerifDisplay">
+                                Agus
+                            </h4>
+                            <p class="font-cormorant text-lg pt-1">
+                                Selamat! Semoga cinta dan kasih sayang selalu menyertai perjalanan hidup kalian.
+                            </p>
+                        </div>
+                        <div class="mb-4 p-5 bg-white rounded-xl border-4 border-[#C3CEB1]">
+                            <h4 class="uppercase text-[#879374] font-dmSerifDisplay">
+                                Maya
+                            </h4>
+                            <p class="font-cormorant text-lg pt-1">
+                                Selamat menikah! Semoga menjadi keluarga yang sakinah, mawaddah, dan rahmah.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- RSVP -->
+                    <div data-aos="fade-up" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        <!-- Judul RSVP -->
+                        <h2 class="text-white text-center text-3xl font-dmSerifDisplay mt-10 mb-5 mx-5">
+                            RSVP
+                        </h2>
+                        <!-- Form -->
+                        <form action="#" method="#" class="mx-5">
+                            <div class="mb-4 w-full">
+                                <label for="name" class="block text-white font-medium font-dmSerifDisplay">
+                                    Nama :
+                                </label>
+                                <input type="text" id="name" name="name"
+                                    class="mt-1 block w-full border border-[#C3CEB1] py-2 px-3 text-sm font-poppins text-black"
+                                    placeholder="Nama Anda" required
+                                    onfocus="this.style.borderColor='#C3CEB1'; this.style.boxShadow='0 0 0 1px #ffffff';"
+                                    onblur="this.style.borderColor='#C3CEB1'; this.style.boxShadow='none';"
+                                    oninvalid="this.setCustomValidity('Kolom ini harus diisi')"
+                                    oninput="this.setCustomValidity('')" style="border-color: #C3CEB1;">
+
+                            </div>
+                            <div class="mb-4 w-full">
+                                <label for="message" class="block text-white font-medium font-dmSerifDisplay">
+                                    Pesan :
+                                </label>
+                                <textarea id="message" name="message" rows="4"
+                                    class="mt-1 block w-full border border-[#C3CEB1] py-2 px-3 text-sm font-poppins text-black"
+                                    placeholder="Tulis pesan Anda di sini..." required
+                                    onfocus="this.style.borderColor='#C3CEB1'; this.style.boxShadow='0 0 0 1px #ffffff';"
+                                    onblur="this.style.borderColor='#C3CEB1'; this.style.boxShadow='none';"
+                                    oninvalid="this.setCustomValidity('Kolom ini harus diisi')" oninput="this.setCustomValidity('')"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <div class="relative inline-block w-full">
+                                    <label for="message" class="block text-white font-medium font-dmSerifDisplay">
+                                        Konfirmasi Kehadiran
+                                    </label>
+                                    <button id="dropdownButton"
+                                        class="mt-1 block text-left bg-white text-black w-full border border-[#C3CEB1] shadow-sm py-2 px-3 sm:text-sm font-montserrat"
+                                        style="transition: 0.5s ease; outline: none;" onclick="toggleDropdown(event)">
+                                        <span class="text-gray-600">. . .</span>
+                                    </button>
+                                    <ul id="dropdownMenu"
+                                        class="hidden absolute z-10 w-full mt-[0.10rem] bg-white text-black border border-[#C3CEB1] shadow-lg font-montserrat">
+                                        <li class="py-2 px-3 cursor-pointer hover:bg-[#C3CEB1] hover:text-white"
+                                            onclick="selectOption('Ya, Saya akan datang')">
+                                            Ya, Saya akan datang
+                                        </li>
+                                        <li class="py-2 px-3 cursor-pointer hover:bg-[#C3CEB1] hover:text-white"
+                                            onclick="selectOption('Maaf, Saya tidak bisa datang')">
+                                            Maaf, Saya tidak bisa datang
+                                        </li>
+                                        <li class="py-2 px-3 cursor-pointer hover:bg-[#C3CEB1] hover:text-white"
+                                            onclick="selectOption('Saya belum tahu bisa datang atau tidak')">
+                                            Saya belum tahu bisa datang atau tidak
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="text-center text-sm">
+                                <button type="submit"
+                                    class="text-[#879374] shadow-xl py-2 px-6 border border-[#C3CEB1] focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1 transition ease-in-out duration-150 font-montserrat"
+                                    style="background-color: #ffffff">
+                                    <span>Kirim</span>
+                                    <i class="fas fa-paper-plane ml-1"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kado Digital -->
+    <section>
+        <div class="bg-[#879374] relative flex justify-center items-center min-h-screen w-full mx-auto max-w-[500px]">
+            <div class="flex flex-col">
+                <div class="my-10 bg-white border-4 border-[#C3CEB1] rounded-xl py-10 mx-5 shadow-xl"
+                    data-aos="fade-up" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                    <!-- Judul -->
+                    <div class="text-center mb-9">
+                        <div class="text-3xl uppercase text-[#879374] font-dmSerifDisplay mb-5 mx-8">
+                            Kado Digital
+                        </div>
+                        <div class="font-cormorant text-lg my-5 mx-8">
+                            Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah
+                            ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless
+                        </div>
+                    </div>
+                    <!-- Divider -->
+                    <div class="flex items-center justify-center text-center gap-4">
+                        <div class="h-[1px] bg-[#879374] flex-1"></div>
+                        <div class="text-2xl text-[#879374] mx-0 md:mx-2">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="h-[1px] bg-[#879374] flex-1"></div>
+                    </div>
+                    <!-- Rekening -->
+                    <div>
+                        <div class="w-full text-center font-cormorant mt-10">
+                            <p class="text-lg mt-4">Bank :</p>
+                            <p class="text-lg text-[#879374] font-dmSerifDisplay">BCA</p>
+                            <p class="mt-4 text-lg">Atas Nama :</p>
+                            <p class="text-lg text-[#879374] font-dmSerifDisplay">Rizky Syaputra</p>
+                            <p class="mt-4 text-lg">Nomor Rekening :</p>
+                            <p id="nomor_rekening_1" class="text-lg text-[#879374] font-dmSerifDisplay mb-4">
+                                12345678910
+                            </p>
+                            <div class="mb-4 text-center">
+                                <button id="copyButton_1" type="button" onclick="copyToClipboard(1)"
+                                    class="text-lg shadow-xl text-nowrap border-2 border-[#C3CEB1] text-white py-2 px-6 focus:outline-none focus:ring-2 focus:ring-[#C3CEB1] focus:ring-offset-2 transition ease-in-out duration-150"
+                                    style="background-color: #879374;">
+                                    <span>Salin Nomor Rekening</span>
+                                    <i class="fas fa-copy text-lg ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="w-full text-center font-cormorant">
+                            <p class="text-lg mt-4">Bank :</p>
+                            <p class="text-lg text-[#879374] font-dmSerifDisplay">BCA</p>
+                            <p class="mt-4 text-lg">Atas Nama :</p>
+                            <p class="text-lg text-[#879374] font-dmSerifDisplay">Ana Lutfiani</p>
+                            <p class="mt-4 text-lg">Nomor Rekening :</p>
+                            <p id="nomor_rekening_2" class="text-lg text-[#879374] font-dmSerifDisplay mb-4">
+                                10987654321
+                            </p>
+                            <div class="mb-4 text-center">
+                                <button id="copyButton_2" type="button" onclick="copyToClipboard(2)"
+                                    class="text-lg shadow-xl text-nowrap border-2 border-[#C3CEB1] text-white py-2 px-6 focus:outline-none focus:ring-2 focus:ring-[#C3CEB1] focus:ring-offset-2 transition ease-in-out duration-150"
+                                    style="background-color: #879374;">
+                                    <span>Salin Nomor Rekening</span>
+                                    <i class="fas fa-copy text-lg ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Penutup -->
+    <div class="bg-[#879374] relative flex justify-center items-center min-h-screen w-full mx-auto max-w-[500px]">
+        <!-- Konten -->
+        <div class="flex flex-col text-center bg-white border-4 border-[#C3CEB1] rounded-xl py-10 px-5 mx-5 shadow-xl">
+            <div class="my-5">
+                <!-- Teks Penutup -->
+                <div data-aos="fade-down" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                    <div class="font-cormorant text-lg">
+                        Suatu kebahagiaan & kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir dan
+                        memberikan do’a restu kepada kami
+                    </div>
+                    <div class="text-[#879374] font-dmSerifDisplay mt-5">
+                        Wassalamu’alaikum Wr. Wb.
+                    </div>
+                </div>
+                <br><br>
+                <!-- Teks -->
+                <div>
+                    <div data-aos="fade-up" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                        <div class="font-cormorant text-lg">
+                            Kami yang berbahagia
+                        </div>
+                        <div class="text-[#879374] text-2xl font-bold mt-3 font-dmSerifDisplay">
+                            Rizky & Ana
+                        </div>
+                    </div>
+                    <div class="mt-10 font-cormorant text-lg" data-aos="zoom-in" data-aos-easing="ease-in-sine"
+                        data-aos-duration="800">
+                        <div class="mt-5">
+                            Created with
+                            <i class="fa-solid fa-heart text-[#879374]" data-aos="zoom-in"
+                                data-aos-easing="ease-in-sine" data-aos-duration="800"></i>
+                            by
+                            <a href="{{ route('home') }}" class="hover:underline" target="_blank">
+                                WeInvite
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Foto -->
+    <div id="default-modal" tabindex="-1" aria-hidden="true"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center">
+        <div class="bg-black/80 absolute inset-0"></div>
+        <div class="relative p-1 w-full max-h-full">
+            <div class="relative bg-white">
+                <button type="button"
+                    class="absolute top-2 right-2 text-white !bg-[#879374] !important text-sm w-7 h-7 inline-flex justify-center items-center"
+                    onclick="closeModal()">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4">
+                    <img id="modal-image" class="w-auto h-full mx-auto object-contain border-2 border-[#879374]"
+                        src="" alt="Modal Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tombol Musik -->
+    <button id="music-control"
+        class="fixed top-4 right-4 z-30 text-[#879374] bg-white py-3 px-4 rounded-full shadow-lg">
+        <i id="music-icon" class="fas fa-music pr-[1px]"></i>
+        <audio id="background-music" loop autoplay>
+            <source src="{{ asset('tema/music/Yiruma, (이루마) - Kiss the Rain.mp3') }}" type="audio/mpeg">
+        </audio>
+    </button>
+
+    <script>
+        // Disable Klik Kanan
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Disable specific key combinations
+        document.addEventListener('keydown', event => {
+            if (
+                event.key === "F12" ||
+                (event.ctrlKey && event.shiftKey && (event.key === "I" || event.key === "J" || event.key === "C" ||
+                    event.key === "K")) ||
+                (event.ctrlKey && event.key === "U") ||
+                (event.metaKey && event.altKey && (event.key === "I" || event.key === "J" || event.key === "U")) ||
+                (event.metaKey && event.shiftKey && (event.key === "C" || event.key === "K"))
+            ) {
+                event.preventDefault();
+            }
+        });
+
+        // Detect DevTools is open
+        let devtoolsOpen = false;
+        setInterval(() => {
+            const widthThreshold = window.outerWidth - window.innerWidth > 100;
+            const heightThreshold = window.outerHeight - window.innerHeight > 100;
+            if (widthThreshold || heightThreshold) {
+                if (!devtoolsOpen) {
+                    devtoolsOpen = true;
+                }
+            } else {
+                devtoolsOpen = false;
+            }
+        }, 500);
+
+        // Inisialisasi AOS
+        AOS.init();
+
+        // Fungsi Buka Undangan
+        function openInvitation() {
+            document.body.style.overflowY = "auto";
+            document.body.style.overflowX = "hidden";
+
+            const invitation = document.getElementById("main-invitation");
+            invitation.scrollIntoView({
+                behavior: "smooth",
+            });
+        }
+
+        // Inisialisasi Navbar saat Halaman Dimuat
+        window.onload = function() {
+            document.body.style.overflow = "hidden";
+            const coverPage = document.getElementById("cover-page");
+            coverPage.scrollIntoView({
+                behavior: "smooth",
+            });
+        };
+
+        // Fungsi Countdown
+        const targetDate = new Date("2025-12-31T08:00:00+01:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "Acara Telah Dimulai!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.querySelector('.days').innerText = days < 10 ? '0' + days : days;
+            document.querySelector('.hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.querySelector('.minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.querySelector('.seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }, 1000);
+
+        // Fungsi Buka Modal
+        function openModal(imageSrc) {
+            const modalImage = document.getElementById("modal-image");
+            modalImage.src = imageSrc;
+
+            const modal = document.getElementById("default-modal");
+            const modalContent = modal.querySelector('.relative');
+
+            modal.classList.remove("hidden");
+
+            gsap.fromTo(
+                modalContent, {
+                    scale: 0,
+                    opacity: 0,
+                }, {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "back.out(1.7)",
+                }
+            );
+        }
+
+        // Fungsi Tutup Modal
+        function closeModal() {
+            const modal = document.getElementById("default-modal");
+            const modalContent = modal.querySelector('.relative');
+
+            gsap.to(modalContent, {
+                scale: 0,
+                opacity: 0,
+                duration: 0.5,
+                ease: "back.in(1.7)",
+                onComplete: () => {
+                    modal.classList.add("hidden");
+                },
+            });
+        }
+
+        // Fungsi Salin Nomor Rekening
+        function copyToClipboard(id) {
+            const rekeningText = document.getElementById("nomor_rekening_" + id).innerText;
+
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = rekeningText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextArea);
+
+            const button = document.getElementById("copyButton_" + id);
+            button.innerHTML =
+                '<span>Nomor Rekening Berhasil Disalin!</span> <i class="fas fa-check text-lg ml-1"></i>';
+
+            setTimeout(() => {
+                button.innerHTML =
+                    '<span>Salin Nomor Rekening</span> <i class="fas fa-copy text-lg ml-1"></i>';
+            }, 3000);
+        }
+
+        // Fungsi Toggle Dropdown
+        function toggleDropdown(event) {
+            event.preventDefault();
+            const dropdownMenu = document.getElementById("dropdownMenu");
+            dropdownMenu.classList.toggle("hidden");
+        }
+
+        // Fungsi Pilih Opsi Dropdown
+        function selectOption(option) {
+            const dropdownButton = document.getElementById("dropdownButton");
+            dropdownButton.textContent = option;
+            document.getElementById("dropdownMenu").classList.add("hidden");
+        }
+
+        // Fungsi Tutup Dropdown Saat Mengklik Di Luar Dropdown
+        document.addEventListener("click", function(event) {
+            const dropdownButton = document.getElementById("dropdownButton");
+            const dropdownMenu = document.getElementById("dropdownMenu");
+            if (!dropdownButton.contains(event.target)) {
+                dropdownMenu.classList.add("hidden");
+            }
+        });
+
+        // Fungsi Pause & Play Music
+        const musicControl = document.getElementById('music-control');
+        const backgroundMusic = document.getElementById('background-music');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = true;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                backgroundMusic.pause();
+                musicIcon.classList.remove('fa-music');
+                musicIcon.classList.add('fa-pause');
+            } else {
+                backgroundMusic.play();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-music');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        musicControl.addEventListener('click', toggleMusic);
+
+        // Custom Form
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', function(event) {
+                const requiredInputs = Array.from(form.querySelectorAll('input[required]'));
+                let firstInvalidInput = null;
+
+                requiredInputs.forEach(input => {
+                    input.setCustomValidity('');
+                });
+
+                for (const input of requiredInputs) {
+                    if (!input.value.trim()) {
+                        if (!firstInvalidInput) {
+                            firstInvalidInput = input;
+                        }
+                        input.setCustomValidity('Kolom ini harus diisi.');
+                    }
+                }
+
+                if (firstInvalidInput) {
+                    firstInvalidInput.focus();
+                    firstInvalidInput.reportValidity();
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
